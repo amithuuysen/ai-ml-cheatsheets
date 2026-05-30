@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Learning Paradigms - Architecture Diagrams</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: white;
+            padding: 40px;
+            margin: 0;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .diagram-section {
+            background: white;
+            margin-bottom: 60px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 50px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+        }
+        h2 {
+            color: #34495e;
+            font-size: 24px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .box {
+            padding: 20px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+            min-width: 140px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+            transition: transform 0.2s;
+        }
+        .box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .data-box {
+            background: #e8f4f8;
+            border: 2px solid #3498db;
+            color: #2980b9;
+        }
+        .model-box {
+            background: #fef5e7;
+            border: 2px solid #f39c12;
+            color: #d68910;
+        }
+        .output-box {
+            background: #e8f8f5;
+            border: 2px solid #27ae60;
+            color: #1e8449;
+        }
+        .error-box {
+            background: #fadbd8;
+            border: 2px solid #e74c3c;
+            color: #c0392b;
+        }
+        .update-box {
+            background: #f4ecf7;
+            border: 2px solid #9b59b6;
+            color: #7d3c98;
+        }
+        .agent-box {
+            background: #ebf5fb;
+            border: 2px solid #3498db;
+            color: #2874a6;
+        }
+        .env-box {
+            background: #fef9e7;
+            border: 2px solid #f1c40f;
+            color: #b7950b;
+        }
+        .reward-box {
+            background: #d5f4e6;
+            border: 2px solid #28b463;
+            color: #1d8348;
+        }
+        .pattern-box {
+            background: #fdecea;
+            border: 2px solid #ec7063;
+            color: #cb4335;
+        }
+        .arrow {
+            font-size: 28px;
+            color: #7f8c8d;
+            font-weight: bold;
+        }
+        .loop-arrow {
+            font-size: 24px;
+            color: #9b59b6;
+        }
+        .label {
+            font-size: 12px;
+            color: #7f8c8d;
+            text-align: center;
+            margin: 5px 0;
+            font-style: italic;
+        }
+        .flow-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        .horizontal-flow {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .vertical-arrow {
+            font-size: 28px;
+            color: #7f8c8d;
+            font-weight: bold;
+        }
+        .rl-loop {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+            padding: 20px;
+        }
+        .rl-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .feedback-arrow {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            color: #9b59b6;
+            opacity: 0.3;
+        }
+        .key-points {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            border-radius: 4px;
+        }
+        .key-points h3 {
+            color: #2c3e50;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .key-points ul {
+            margin: 0;
+            padding-left: 20px;
+            color: #555;
+        }
+        .key-points li {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Machine Learning Paradigms — Architecture Diagrams</h1>
+        
+        <!-- SUPERVISED LEARNING -->
+        <div class="diagram-section">
+            <h2>1. Supervised Learning Flow</h2>
+            <div class="flow-container">
+                <div class="horizontal-flow">
+                    <div class="box data-box">Labeled Data<br><small>(X, y)</small></div>
+                    <span class="arrow">→</span>
+                    <div class="box model-box">Model<br><small>(learns mapping)</small></div>
+                    <span class="arrow">→</span>
+                    <div class="box output-box">Predictions<br><small>(ŷ)</small></div>
+                </div>
+                
+                <div class="vertical-arrow">↓</div>
+                
+                <div class="horizontal-flow">
+                    <div class="box error-box">Calculate Error<br><small>(Loss = y - ŷ)</small></div>
+                </div>
+                
+                <div class="vertical-arrow">↓</div>
+                
+                <div class="horizontal-flow">
+                    <div class="box update-box">Update Parameters<br><small>(Gradient Descent)</small></div>
+                </div>
+                
+                <div class="loop-arrow">↻ Iterate until convergence</div>
+            </div>
+            
+            <div class="key-points">
+                <h3>Key Characteristics:</h3>
+                <ul>
+                    <li><strong>Teacher present:</strong> Training data includes correct answers (labels)</li>
+                    <li><strong>Goal:</strong> Learn function f: X → y that generalizes to unseen data</li>
+                    <li><strong>Feedback:</strong> Direct error signal from comparing predictions to true labels</li>
+                    <li><strong>Examples:</strong> Classification (cat/dog), Regression (house prices)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- UNSUPERVISED LEARNING -->
+        <div class="diagram-section">
+            <h2>2. Unsupervised Learning Flow</h2>
+            <div class="flow-container">
+                <div class="horizontal-flow">
+                    <div class="box data-box">Unlabeled Data<br><small>(X only)</small></div>
+                    <span class="arrow">→</span>
+                    <div class="box model-box">Model<br><small>(finds structure)</small></div>
+                    <span class="arrow">→</span>
+                    <div class="box pattern-box">Discovered Patterns<br><small>(clusters/features)</small></div>
+                </div>
+                
+                <div class="vertical-arrow">↓</div>
+                
+                <div class="horizontal-flow">
+                    <div class="box output-box">Grouping / Transformation<br><small>(segments, dimensions)</small></div>
+                </div>
+                
+                <div class="vertical-arrow">↓</div>
+                
+                <div class="horizontal-flow">
+                    <div class="box update-box">Evaluate Intrinsically<br><small>(silhouette, reconstruction)</small></div>
+                </div>
+            </div>
+            
+            <div class="key-points">
+                <h3>Key Characteristics:</h3>
+                <ul>
+                    <li><strong>No teacher:</strong> No labels or correct answers provided</li>
+                    <li><strong>Goal:</strong> Discover hidden structure, patterns, or representations in data</li>
+                    <li><strong>Feedback:</strong> Intrinsic quality metrics (no ground truth)</li>
+                    <li><strong>Examples:</strong> Customer segmentation, anomaly detection, dimensionality reduction</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- REINFORCEMENT LEARNING -->
+        <div class="diagram-section">
+            <h2>3. Reinforcement Learning Loop</h2>
+            <div class="rl-loop">
+                <div class="rl-row">
+                    <div class="box agent-box">Agent<br><small>(makes decisions)</small></div>
+                    <span class="arrow">→</span>
+                    <div class="box model-box">Action<br><small>(a<sub>t</sub>)</small></div>
+                    <span class="arrow">→</span>
+                    <div class="box env-box">Environment<br><small>(state s<sub>t</sub>)</small></div>
+                </div>
+                
+                <div class="vertical-arrow">↓</div>
+                
+                <div class="rl-row">
+                    <div class="box reward-box">Reward Signal<br><small>(r<sub>t</sub>)</small></div>
+                    <span class="arrow">+</span>
+                    <div class="box output-box">New State<br><small>(s<sub>t+1</sub>)</small></div>
+                </div>
+                
+                <div class="vertical-arrow">↓</div>
+                
+                <div class="rl-row">
+                    <div class="box update-box">Update Policy<br><small>(maximize Σ rewards)</small></div>
+                </div>
+                
+                <div class="loop-arrow">↻ Continuous learning loop</div>
+                
+                <div class="feedback-arrow">⟲</div>
+            </div>
+            
+            <div class="key-points">
+                <h3>Key Characteristics:</h3>
+                <ul>
+                    <li><strong>Interactive learning:</strong> Agent learns by interacting with environment</li>
+                    <li><strong>Goal:</strong> Find optimal policy π that maximizes cumulative reward</li>
+                    <li><strong>Feedback:</strong> Delayed reward signals (not immediate labels)</li>
+                    <li><strong>Trade-off:</strong> Exploration (try new actions) vs. Exploitation (use known good actions)</li>
+                    <li><strong>Examples:</strong> Game playing, robotics, autonomous driving, resource allocation</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
