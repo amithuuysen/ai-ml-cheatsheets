@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forward and Backward Propagation</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            background: white;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 40px;
+            font-size: 28px;
+        }
+        svg {
+            display: block;
+            margin: 0 auto;
+        }
+        .box {
+            fill: #ecf0f1;
+            stroke: #34495e;
+            stroke-width: 2;
+        }
+        .forward-box {
+            fill: #3498db;
+        }
+        .backward-box {
+            fill: #e74c3c;
+        }
+        .loss-box {
+            fill: #f39c12;
+        }
+        .box-text {
+            font-size: 14px;
+            fill: white;
+            font-weight: bold;
+            text-anchor: middle;
+        }
+        .arrow {
+            stroke: #2c3e50;
+            stroke-width: 3;
+            fill: none;
+            marker-end: url(#arrowhead);
+        }
+        .forward-arrow {
+            stroke: #3498db;
+        }
+        .backward-arrow {
+            stroke: #e74c3c;
+        }
+        .formula-text {
+            font-size: 12px;
+            fill: #2c3e50;
+        }
+        .section-label {
+            font-size: 18px;
+            font-weight: bold;
+            fill: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>⚡ Forward and Backward Propagation Flow</h2>
+        <svg width="1100" height="700" viewBox="0 0 1100 700">
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                    <polygon points="0 0, 10 3, 0 6" fill="#2c3e50" />
+                </marker>
+            </defs>
+
+            <!-- Title Labels -->
+            <text x="550" y="80" class="section-label" text-anchor="middle">🔵 FORWARD PROPAGATION (Training)</text>
+            <text x="550" y="450" class="section-label" text-anchor="middle">🔴 BACKWARD PROPAGATION (Gradient Descent)</text>
+
+            <!-- ========== FORWARD PROPAGATION ========== -->
+            
+            <!-- Input Layer -->
+            <rect x="50" y="120" width="120" height="60" class="box forward-box" rx="8"/>
+            <text x="110" y="155" class="box-text">Input (x)</text>
+
+            <!-- Hidden Layer 1 -->
+            <rect x="250" y="120" width="120" height="60" class="box forward-box" rx="8"/>
+            <text x="310" y="145" class="box-text">z⁽¹⁾ = W⁽¹⁾x + b⁽¹⁾</text>
+            <text x="310" y="165" class="box-text">a⁽¹⁾ = σ(z⁽¹⁾)</text>
+
+            <!-- Hidden Layer 2 -->
+            <rect x="450" y="120" width="120" height="60" class="box forward-box" rx="8"/>
+            <text x="510" y="145" class="box-text">z⁽²⁾ = W⁽²⁾a⁽¹⁾ + b⁽²⁾</text>
+            <text x="510" y="165" class="box-text">a⁽²⁾ = σ(z⁽²⁾)</text>
+
+            <!-- Output Layer -->
+            <rect x="650" y="120" width="120" height="60" class="box forward-box" rx="8"/>
+            <text x="710" y="145" class="box-text">z⁽³⁾ = W⁽³⁾a⁽²⁾ + b⁽³⁾</text>
+            <text x="710" y="165" class="box-text">ŷ = σ(z⁽³⁾)</text>
+
+            <!-- Loss -->
+            <rect x="850" y="120" width="150" height="60" class="box loss-box" rx="8"/>
+            <text x="925" y="145" class="box-text">Compute Loss</text>
+            <text x="925" y="165" class="box-text">L(ŷ, y)</text>
+
+            <!-- Forward Arrows -->
+            <path d="M 170 150 L 245 150" class="arrow forward-arrow"/>
+            <path d="M 370 150 L 445 150" class="arrow forward-arrow"/>
+            <path d="M 570 150 L 645 150" class="arrow forward-arrow"/>
+            <path d="M 770 150 L 845 150" class="arrow forward-arrow"/>
+
+            <!-- Forward Flow Labels -->
+            <text x="207" y="135" class="formula-text">propagate →</text>
+            <text x="407" y="135" class="formula-text">propagate →</text>
+            <text x="607" y="135" class="formula-text">propagate →</text>
+            <text x="807" y="135" class="formula-text">compare</text>
+
+            <!-- ========== BACKWARD PROPAGATION ========== -->
+
+            <!-- Gradient boxes (reversed order) -->
+            
+            <!-- Output Gradient -->
+            <rect x="850" y="500" width="150" height="60" class="box backward-box" rx="8"/>
+            <text x="925" y="525" class="box-text">∂L/∂ŷ</text>
+            <text x="925" y="545" class="box-text">(output error)</text>
+
+            <!-- Layer 3 Gradient -->
+            <rect x="650" y="500" width="120" height="60" class="box backward-box" rx="8"/>
+            <text x="710" y="520" class="box-text">∂L/∂W⁽³⁾, ∂L/∂b⁽³⁾</text>
+            <text x="710" y="540" class="box-text">∂L/∂a⁽²⁾</text>
+
+            <!-- Layer 2 Gradient -->
+            <rect x="450" y="500" width="120" height="60" class="box backward-box" rx="8"/>
+            <text x="510" y="520" class="box-text">∂L/∂W⁽²⁾, ∂L/∂b⁽²⁾</text>
+            <text x="510" y="540" class="box-text">∂L/∂a⁽¹⁾</text>
+
+            <!-- Layer 1 Gradient -->
+            <rect x="250" y="500" width="120" height="60" class="box backward-box" rx="8"/>
+            <text x="310" y="520" class="box-text">∂L/∂W⁽¹⁾, ∂L/∂b⁽¹⁾</text>
+            <text x="310" y="540" class="box-text">∂L/∂x</text>
+
+            <!-- Update Weights -->
+            <rect x="50" y="500" width="120" height="60" class="box backward-box" rx="8"/>
+            <text x="110" y="520" class="box-text">Update</text>
+            <text x="110" y="540" class="box-text">Weights</text>
+
+            <!-- Backward Arrows -->
+            <path d="M 845 530 L 775 530" class="arrow backward-arrow"/>
+            <path d="M 645 530 L 575 530" class="arrow backward-arrow"/>
+            <path d="M 445 530 L 375 530" class="arrow backward-arrow"/>
+            <path d="M 245 530 L 175 530" class="arrow backward-arrow"/>
+
+            <!-- Backward Flow Labels -->
+            <text x="780" y="515" class="formula-text">← chain rule</text>
+            <text x="580" y="515" class="formula-text">← chain rule</text>
+            <text x="380" y="515" class="formula-text">← chain rule</text>
+            <text x="180" y="515" class="formula-text">← update</text>
+
+            <!-- Update Formula -->
+            <rect x="50" y="590" width="950" height="70" style="fill: #f8f9fa; stroke: #bdc3c7; stroke-width: 2;" rx="8"/>
+            <text x="525" y="615" style="font-size: 16px; fill: #2c3e50; text-anchor: middle; font-weight: bold;">
+                Weight Update Rule (Gradient Descent):
+            </text>
+            <text x="525" y="645" style="font-size: 18px; fill: #e74c3c; text-anchor: middle; font-weight: bold;">
+                W⁽ˡ⁾ ← W⁽ˡ⁾ - η · ∂L/∂W⁽ˡ⁾   |   b⁽ˡ⁾ ← b⁽ˡ⁾ - η · ∂L/∂b⁽ˡ⁾
+            </text>
+
+            <!-- Connection lines between forward and backward -->
+            <path d="M 925 180 L 925 495" style="stroke: #95a5a6; stroke-width: 2; stroke-dasharray: 5,5; fill: none;"/>
+            <path d="M 710 180 L 710 495" style="stroke: #95a5a6; stroke-width: 2; stroke-dasharray: 5,5; fill: none;"/>
+            <path d="M 510 180 L 510 495" style="stroke: #95a5a6; stroke-width: 2; stroke-dasharray: 5,5; fill: none;"/>
+            <path d="M 310 180 L 310 495" style="stroke: #95a5a6; stroke-width: 2; stroke-dasharray: 5,5; fill: none;"/>
+
+            <!-- Annotation -->
+            <text x="550" y="280" style="font-size: 14px; fill: #7f8c8d; text-anchor: middle;">
+                Forward: Compute predictions and loss
+            </text>
+            <text x="550" y="380" style="font-size: 14px; fill: #7f8c8d; text-anchor: middle;">
+                Backward: Compute gradients and update weights
+            </text>
+        </svg>
+    </div>
+</body>
+</html>

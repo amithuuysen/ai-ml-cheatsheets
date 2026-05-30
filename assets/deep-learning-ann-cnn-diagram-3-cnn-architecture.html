@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CNN Architecture Diagram</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            background: white;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 40px;
+            font-size: 28px;
+        }
+        svg {
+            display: block;
+            margin: 0 auto;
+        }
+        .input-layer {
+            fill: #3498db;
+            stroke: #2980b9;
+            stroke-width: 2;
+        }
+        .conv-layer {
+            fill: #e74c3c;
+            stroke: #c0392b;
+            stroke-width: 2;
+        }
+        .pool-layer {
+            fill: #9b59b6;
+            stroke: #8e44ad;
+            stroke-width: 2;
+        }
+        .fc-layer {
+            fill: #f39c12;
+            stroke: #d68910;
+            stroke-width: 2;
+        }
+        .output-layer {
+            fill: #2ecc71;
+            stroke: #27ae60;
+            stroke-width: 2;
+        }
+        .layer-label {
+            font-size: 13px;
+            font-weight: bold;
+            fill: white;
+            text-anchor: middle;
+        }
+        .dimension-label {
+            font-size: 11px;
+            fill: #2c3e50;
+            text-anchor: middle;
+        }
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            fill: #2c3e50;
+        }
+        .arrow {
+            stroke: #34495e;
+            stroke-width: 2;
+            fill: none;
+            marker-end: url(#arrowhead);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🖼️ Convolutional Neural Network (CNN) Architecture</h2>
+        <svg width="1350" height="600" viewBox="0 0 1350 600">
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                    <polygon points="0 0, 10 3, 0 6" fill="#34495e" />
+                </marker>
+                <!-- Gradient for 3D effect -->
+                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:rgb(52,152,219);stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:rgb(41,128,185);stop-opacity:1" />
+                </linearGradient>
+            </defs>
+
+            <!-- Title -->
+            <text x="675" y="50" style="font-size: 18px; font-weight: bold; fill: #2c3e50; text-anchor: middle;">
+                Image Classification CNN Pipeline
+            </text>
+
+            <!-- ========== INPUT IMAGE ========== -->
+            <g id="input">
+                <!-- 3D cube effect -->
+                <polygon points="80,200 80,300 180,300 180,200" class="input-layer"/>
+                <polygon points="180,200 180,300 200,280 200,180" style="fill: #2980b9; stroke: #2471a3; stroke-width: 2;"/>
+                <polygon points="80,200 180,200 200,180 100,180" style="fill: #5dade2; stroke: #2980b9; stroke-width: 2;"/>
+                
+                <text x="130" y="350" class="section-title">Input</text>
+                <text x="130" y="370" class="dimension-label">32×32×3</text>
+                <text x="130" y="385" class="dimension-label">(RGB Image)</text>
+            </g>
+
+            <!-- Arrow -->
+            <path d="M 210 240 L 250 240" class="arrow"/>
+
+            <!-- ========== CONV 1 ========== -->
+            <g id="conv1">
+                <polygon points="270,180 270,300 340,300 340,180" class="conv-layer"/>
+                <polygon points="340,180 340,300 360,280 360,160" style="fill: #c0392b; stroke: #a93226; stroke-width: 2;"/>
+                <polygon points="270,180 340,180 360,160 290,160" style="fill: #ec7063; stroke: #c0392b; stroke-width: 2;"/>
+                
+                <text x="315" y="145" class="section-title">Conv 1</text>
+                <text x="315" y="330" class="dimension-label">30×30×16</text>
+                <text x="315" y="345" class="dimension-label">(16 filters)</text>
+            </g>
+
+            <!-- Arrow -->
+            <path d="M 370 240 L 400 240" class="arrow"/>
+
+            <!-- ========== POOL 1 ========== -->
+            <g id="pool1">
+                <polygon points="420,200 420,280 470,280 470,200" class="pool-layer"/>
+                <polygon points="470,200 470,280 485,265 485,185" style="fill: #8e44ad; stroke: #7d3c98; stroke-width: 2;"/>
+                <polygon points="420,200 470,200 485,185 435,185" style="fill: #bb8fce; stroke: #8e44ad; stroke-width: 2;"/>
+                
+                <text x="452" y="170" class="section-title">Pool 1</text>
+                <text x="452" y="310" class="dimension-label">15×15×16</text>
+                <text x="452" y="325" class="dimension-label">(MaxPool)</text>
+            </g>
+
+            <!-- Arrow -->
+            <path d="M 495 240 L 525 240" class="arrow"/>
+
+            <!-- ========== CONV 2 ========== -->
+            <g id="conv2">
+                <polygon points="545,170 545,310 615,310 615,170" class="conv-layer"/>
+                <polygon points="615,170 615,310 640,285 640,145" style="fill: #c0392b; stroke: #a93226; stroke-width: 2;"/>
+                <polygon points="545,170 615,170 640,145 570,145" style="fill: #ec7063; stroke: #c0392b; stroke-width: 2;"/>
+                
+                <text x="592" y="130" class="section-title">Conv 2</text>
+                <text x="592" y="340" class="dimension-label">13×13×32</text>
+                <text x="592" y="355" class="dimension-label">(32 filters)</text>
+            </g>
+
+            <!-- Arrow -->
+            <path d="M 650 240 L 680 240" class="arrow"/>
+
+            <!-- ========== POOL 2 ========== -->
+            <g id="pool2">
+                <polygon points="700,210 700,270 740,270 740,210" class="pool-layer"/>
+                <polygon points="740,210 740,270 752,258 752,198" style="fill: #8e44ad; stroke: #7d3c98; stroke-width: 2;"/>
+                <polygon points="700,210 740,210 752,198 712,198" style="fill: #bb8fce; stroke: #8e44ad; stroke-width: 2;"/>
+                
+                <text x="726" y="185" class="section-title">Pool 2</text>
+                <text x="726" y="295" class="dimension-label">6×6×32</text>
+            </g>
+
+            <!-- Arrow -->
+            <path d="M 762 240 L 792 240" class="arrow"/>
+
+            <!-- ========== FLATTEN ========== -->
+            <g id="flatten">
+                <rect x="812" y="220" width="40" height="40" style="fill: #34495e; stroke: #2c3e50; stroke-width: 2;" rx="4"/>
+                <text x="832" y="245" style="fill: white; font-size: 12px; text-anchor: middle; font-weight: bold;">⇩</text>
+                
+                <text x="832" y="205" class="section-title">Flatten</text>
+                <text x="832" y="280" class="dimension-label">1152</text>
+                <text x="832" y="295" class="dimension-label">(6×6×32)</text>
+            </g>
+
+            <!-- Arrow -->
+            <path d="M 862 240 L 892 240" class="arrow"/>
+
+            <!-- ========== FC 1 ========== -->
+            <g id="fc1">
+                <rect x="912" y="190" width="70" height="100" class="fc-layer" rx="8"/>
+                <circle cx="947" cy="215" r="6" style="fill: white;"/>
+                <circle cx="947" cy="235" r="6" style="fill: white;"/>
+                <circle cx="947" cy="255" r="6" style="fill: white;"/>
+                <circle cx="947" cy="275" r="6" style="fill: white;"/>
+                
+                <text x="947" y="175" class="section-title">FC 1</text>
+                <text x="947" y="315" class="dimension-label">128 neurons</text>
+            </g>
+
+            <!-- Arrow -->
+            <path d="M 992 240 L 1022 240" class="arrow"/>
+
+            <!-- ========== FC 2 ========== -->
+            <g id="fc2">
+                <rect x="1042" y="200" width="60" height="80" class="fc-layer" rx="8"/>
+                <circle cx="1072" cy="225" r="5" style="fill: white;"/>
+                <circle cx="1072" cy="245" r="5" style="fill: white;"/>
+                <circle cx="1072" cy="265" r="5" style="fill: white;"/>
+                
+                <text x="1072" y="185" class="section-title">FC 2</text>
+                <text x="1072" y="300" class="dimension-label">64 neurons</text>
+            </g>
+
+            <!-- Arrow -->
+            <path d="M 1112 240 L 1142 240" class="arrow"/>
+
+            <!-- ========== OUTPUT ========== -->
+            <g id="output">
+                <rect x="1162" y="210" width="60" height="60" class="output-layer" rx="8"/>
+                <text x="1192" y="245" style="fill: white; font-size: 16px; text-anchor: middle; font-weight: bold;">✓</text>
+                
+                <text x="1192" y="195" class="section-title">Output</text>
+                <text x="1192" y="290" class="dimension-label">10 classes</text>
+                <text x="1192" y="305" class="dimension-label">(Softmax)</text>
+            </g>
+
+            <!-- Legend -->
+            <g id="legend">
+                <text x="675" y="420" style="font-size: 16px; font-weight: bold; fill: #2c3e50; text-anchor: middle;">
+                    Layer Types Legend
+                </text>
+                
+                <rect x="350" y="440" width="30" height="30" class="input-layer" rx="4"/>
+                <text x="395" y="460" style="font-size: 12px; fill: #2c3e50;">Input (Raw Image)</text>
+                
+                <rect x="550" y="440" width="30" height="30" class="conv-layer" rx="4"/>
+                <text x="595" y="460" style="font-size: 12px; fill: #2c3e50;">Convolution (Feature Extraction)</text>
+                
+                <rect x="800" y="440" width="30" height="30" class="pool-layer" rx="4"/>
+                <text x="845" y="460" style="font-size: 12px; fill: #2c3e50;">Pooling (Downsampling)</text>
+                
+                <rect x="350" y="490" width="30" height="30" class="fc-layer" rx="4"/>
+                <text x="395" y="510" style="font-size: 12px; fill: #2c3e50;">Fully Connected (Dense)</text>
+                
+                <rect x="600" y="490" width="30" height="30" class="output-layer" rx="4"/>
+                <text x="645" y="510" style="font-size: 12px; fill: #2c3e50;">Output (Classification)</text>
+            </g>
+
+            <!-- Annotations -->
+            <text x="675" y="550" style="font-size: 13px; fill: #7f8c8d; text-anchor: middle; font-style: italic;">
+                Feature maps get deeper (more channels) and smaller (spatial dimensions) through the network
+            </text>
+        </svg>
+    </div>
+</body>
+</html>

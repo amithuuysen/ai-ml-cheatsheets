@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pooling Operation Visualization</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            background: white;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 40px;
+            font-size: 28px;
+        }
+        svg {
+            display: block;
+            margin: 0 auto;
+        }
+        .cell {
+            stroke: #34495e;
+            stroke-width: 1.5;
+        }
+        .input-cell {
+            fill: #ecf0f1;
+        }
+        .highlight-cell {
+            fill: #f39c12;
+            stroke: #e67e22;
+            stroke-width: 3;
+        }
+        .output-cell {
+            fill: #9b59b6;
+        }
+        .max-cell {
+            fill: #e74c3c;
+            stroke: #c0392b;
+            stroke-width: 3;
+        }
+        .cell-text {
+            font-size: 14px;
+            fill: #2c3e50;
+            text-anchor: middle;
+            font-weight: bold;
+        }
+        .output-text {
+            font-size: 18px;
+            fill: white;
+            text-anchor: middle;
+            font-weight: bold;
+        }
+        .label {
+            font-size: 16px;
+            font-weight: bold;
+            fill: #2c3e50;
+        }
+        .arrow {
+            stroke: #e74c3c;
+            stroke-width: 3;
+            fill: none;
+            marker-end: url(#arrowhead);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>💧 Max Pooling Operation (2×2 with stride 2)</h2>
+        <svg width="1150" height="800" viewBox="0 0 1150 800">
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                    <polygon points="0 0, 10 3, 0 6" fill="#e74c3c" />
+                </marker>
+            </defs>
+
+            <!-- Title -->
+            <text x="575" y="40" style="font-size: 18px; font-weight: bold; fill: #2c3e50; text-anchor: middle;">
+                Max Pooling: Takes maximum value from each region (reduces spatial dimensions)
+            </text>
+
+            <!-- ========== INPUT FEATURE MAP (4x4) ========== -->
+            <text x="200" y="90" class="label">Input Feature Map (4×4)</text>
+            
+            <!-- Quadrant 1 (top-left) -->
+            <rect x="100" y="110" width="60" height="60" class="cell highlight-cell"/>
+            <text x="130" y="147" class="cell-text">12</text>
+            <rect x="160" y="110" width="60" height="60" class="cell highlight-cell"/>
+            <text x="190" y="147" class="cell-text">20</text>
+            
+            <rect x="100" y="170" width="60" height="60" class="cell highlight-cell"/>
+            <text x="130" y="207" class="cell-text">8</text>
+            <rect x="160" y="170" width="60" height="60" class="cell max-cell"/>
+            <text x="190" y="207" class="cell-text" style="fill: white;">30</text>
+
+            <!-- Quadrant 2 (top-right) -->
+            <rect x="220" y="110" width="60" height="60" class="cell highlight-cell"/>
+            <text x="250" y="147" class="cell-text">5</text>
+            <rect x="280" y="110" width="60" height="60" class="cell max-cell"/>
+            <text x="310" y="147" class="cell-text" style="fill: white;">18</text>
+            
+            <rect x="220" y="170" width="60" height="60" class="cell highlight-cell"/>
+            <text x="250" y="207" class="cell-text">3</text>
+            <rect x="280" y="170" width="60" height="60" class="cell highlight-cell"/>
+            <text x="310" y="207" class="cell-text">7</text>
+
+            <!-- Quadrant 3 (bottom-left) -->
+            <rect x="100" y="230" width="60" height="60" class="cell highlight-cell"/>
+            <text x="130" y="267" class="cell-text">9</text>
+            <rect x="160" y="230" width="60" height="60" class="cell highlight-cell"/>
+            <text x="190" y="267" class="cell-text">15</text>
+            
+            <rect x="100" y="290" width="60" height="60" class="cell max-cell"/>
+            <text x="130" y="327" class="cell-text" style="fill: white;">25</text>
+            <rect x="160" y="290" width="60" height="60" class="cell highlight-cell"/>
+            <text x="190" y="327" class="cell-text">11</text>
+
+            <!-- Quadrant 4 (bottom-right) -->
+            <rect x="220" y="230" width="60" height="60" class="cell highlight-cell"/>
+            <text x="250" y="267" class="cell-text">6</text>
+            <rect x="280" y="230" width="60" height="60" class="cell highlight-cell"/>
+            <text x="310" y="267" class="cell-text">14</text>
+            
+            <rect x="220" y="290" width="60" height="60" class="cell highlight-cell"/>
+            <text x="250" y="327" class="cell-text">10</text>
+            <rect x="280" y="290" width="60" height="60" class="cell max-cell"/>
+            <text x="310" y="327" class="cell-text" style="fill: white;">22</text>
+
+            <!-- Grid lines to show regions -->
+            <line x1="95" y1="105" x2="225" y2="105" style="stroke: #e67e22; stroke-width: 4; stroke-dasharray: 5,5;"/>
+            <line x1="95" y1="235" x2="225" y2="235" style="stroke: #e67e22; stroke-width: 4; stroke-dasharray: 5,5;"/>
+            <line x1="95" y1="355" x2="225" y2="355" style="stroke: #e67e22; stroke-width: 4; stroke-dasharray: 5,5;"/>
+            <line x1="95" y1="105" x2="95" y2="355" style="stroke: #e67e22; stroke-width: 4; stroke-dasharray: 5,5;"/>
+            <line x1="225" y1="105" x2="225" y2="355" style="stroke: #e67e22; stroke-width: 4; stroke-dasharray: 5,5;"/>
+            <line x1="345" y1="105" x2="345" y2="355" style="stroke: #e67e22; stroke-width: 4; stroke-dasharray: 5,5;"/>
+
+            <!-- Arrow -->
+            <path d="M 360 230 L 440 230" class="arrow"/>
+
+            <!-- ========== OUTPUT FEATURE MAP (2x2) ========== -->
+            <text x="610" y="90" class="label">Output Feature Map (2×2)</text>
+            <text x="610" y="110" style="font-size: 11px; fill: #7f8c8d;">
+                (50% spatial reduction)
+            </text>
+            
+            <rect x="520" y="140" width="80" height="80" class="cell output-cell"/>
+            <text x="560" y="188" class="output-text">30</text>
+            <rect x="600" y="140" width="80" height="80" class="cell output-cell"/>
+            <text x="640" y="188" class="output-text">18</text>
+            
+            <rect x="520" y="220" width="80" height="80" class="cell output-cell"/>
+            <text x="560" y="268" class="output-text">25</text>
+            <rect x="600" y="220" width="80" height="80" class="cell output-cell"/>
+            <text x="640" y="268" class="output-text">22</text>
+
+            <text x="610" y="330" style="font-size: 12px; fill: #7f8c8d; text-anchor: middle;">
+                Each output value = max of 2×2 input region
+            </text>
+
+            <!-- ========== STEP-BY-STEP BREAKDOWN ========== -->
+            <rect x="50" y="400" width="1050" height="340" style="fill: #f8f9fa; stroke: #bdc3c7; stroke-width: 2;" rx="8"/>
+            
+            <text x="575" y="430" style="font-size: 18px; font-weight: bold; fill: #2c3e50; text-anchor: middle;">
+                📊 Step-by-Step Max Pooling Process
+            </text>
+
+            <!-- Step 1 -->
+            <text x="150" y="470" style="font-size: 14px; font-weight: bold; fill: #e74c3c;">Step 1: Top-Left Region (0,0)</text>
+            <rect x="100" y="480" width="40" height="40" style="fill: #ecf0f1; stroke: #34495e; stroke-width: 2;"/>
+            <text x="120" y="507" class="cell-text">12</text>
+            <rect x="140" y="480" width="40" height="40" style="fill: #ecf0f1; stroke: #34495e; stroke-width: 2;"/>
+            <text x="160" y="507" class="cell-text">20</text>
+            <rect x="100" y="520" width="40" height="40" style="fill: #ecf0f1; stroke: #34495e; stroke-width: 2;"/>
+            <text x="120" y="547" class="cell-text">8</text>
+            <rect x="140" y="520" width="40" height="40" style="fill: #e74c3c; stroke: #c0392b; stroke-width: 3;"/>
+            <text x="160" y="547" class="cell-text" style="fill: white;">30</text>
+            <text x="140" y="580" style="font-size: 13px; fill: #2c3e50; text-anchor: middle;">max(12,20,8,30) = <strong style="font-size: 16px; fill: #e74c3c;">30</strong></text>
+
+            <!-- Step 2 -->
+            <text x="390" y="470" style="font-size: 14px; font-weight: bold; fill: #e74c3c;">Step 2: Top-Right Region (0,2)</text>
+            <rect x="340" y="480" width="40" height="40" style="fill: #ecf0f1; stroke: #34495e; stroke-width: 2;"/>
+            <text x="360" y="507" class="cell-text">5</text>
+            <rect x="380" y="480" width="40" height="40" style="fill: #e74c3c; stroke: #c0392b; stroke-width: 3;"/>
+            <text x="400" y="507" class="cell-text" style="fill: white;">18</text>
+            <rect x="340" y="520" width="40" height="40" style="fill: #ecf0f1; stroke: #34495e; stroke-width: 2;"/>
+            <text x="360" y="547" class="cell-text">3</text>
+            <rect x="380" y="520" width="40" height="40" style="fill: #ecf0f1; stroke: #34495e; stroke-width: 2;"/>
+            <text x="400" y="547" class="cell-text">7</text>
+            <text x="380" y="580" style="font-size: 13px; fill: #2c3e50; text-anchor: middle;">max(5,18,3,7) = <strong style="font-size: 16px; fill: #e74c3c;">18</strong></text>
+
+            <!-- Step 3 -->
+            <text x="630" y="470" style="font-size: 14px; font-weight: bold; fill: #e74c3c;">Step 3: Bottom-Left Region (2,0)</text>
+            <rect x="580" y="480" width="40" height="40" style="fill: #ecf0f1; stroke: #34495e; stroke-width: 2;"/>
+            <text x="600" y="507" class="cell-text">9</text>
+            <rect x="620" y="480" width="40" height="40" style="fill: #ecf0f1; stroke: #34495e; stroke-width: 2;"/>
+            <text x="640" y="507" class="cell-text">15</text>
+            <rect x="580" y="520" width="40" height="40" style="fill: #e74c3c; stroke: #c0392b; stroke-width: 3;"/>
+            <text x="600" y="547" class="cell-text" style="fill: white;">25</text>
+            <rect x="620" y="520" width="40" height="40" style="fill: #ecf0f1; stroke: #34495e; stroke-width: 2;"/>
+            <text x="640" y="547" class="cell-text">11</text>
+            <text x="620" y="580" style="font-size: 13px; fill: #2c3e50; text-anchor: middle;">max(9,15,25,11) = <strong style="font-size: 16px; fill: #e74c3c;">25</strong></text>
+
+            <!-- Step 4 -->
+            <text x="870" y="470" style="font-size: 14px; font-weight: bold; fill: #e74c3c;">Step 4: Bottom-Right Region (2,2)</text>
+            <rect x="820" y="480" width="40" height="40" style="fill: #ecf0f1; stroke: #34495e; stroke-width: 2;"/>
+            <text x="840" y="507" class="cell-text">6</text>
+            <rect x="860" y="480" width="40" height="40" style="fill: #ecf0f1; stroke: #34495e; stroke-width: 2;"/>
+            <text x="880" y="507" class="cell-text">14</text>
+            <rect x="820" y="520" width="40" height="40" style="fill: #ecf0f1; stroke: #34495e; stroke-width: 2;"/>
+            <text x="840" y="547" class="cell-text">10</text>
+            <rect x="860" y="520" width="40" height="40" style="fill: #e74c3c; stroke: #c0392b; stroke-width: 3;"/>
+            <text x="880" y="547" class="cell-text" style="fill: white;">22</text>
+            <text x="860" y="580" style="font-size: 13px; fill: #2c3e50; text-anchor: middle;">max(6,14,10,22) = <strong style="font-size: 16px; fill: #e74c3c;">22</strong></text>
+
+            <!-- Benefits -->
+            <text x="575" y="630" style="font-size: 16px; font-weight: bold; fill: #2c3e50; text-anchor: middle;">
+                ✅ Benefits of Max Pooling
+            </text>
+            
+            <text x="100" y="660" style="font-size: 13px; fill: #2c3e50;">
+                <tspan font-weight="bold" fill="#9b59b6">1. Dimensionality Reduction:</tspan> 4×4 → 2×2 (75% fewer parameters)
+            </text>
+            <text x="100" y="680" style="font-size: 13px; fill: #2c3e50;">
+                <tspan font-weight="bold" fill="#9b59b6">2. Translation Invariance:</tspan> Small shifts in input don't affect output
+            </text>
+            <text x="100" y="700" style="font-size: 13px; fill: #2c3e50;">
+                <tspan font-weight="bold" fill="#9b59b6">3. Feature Retention:</tspan> Keeps strongest activations (most important features)
+            </text>
+            <text x="100" y="720" style="font-size: 13px; fill: #2c3e50;">
+                <tspan font-weight="bold" fill="#9b59b6">4. Computational Efficiency:</tspan> Faster training and inference
+            </text>
+
+            <!-- Formula -->
+            <rect x="700" y="645" width="380" height="80" style="fill: white; stroke: #3498db; stroke-width: 2;" rx="6"/>
+            <text x="890" y="670" style="font-size: 14px; font-weight: bold; fill: #2c3e50; text-anchor: middle;">
+                Output Size Formula:
+            </text>
+            <text x="890" y="695" style="font-size: 16px; fill: #e74c3c; text-anchor: middle; font-weight: bold;">
+                [(W - K) / S] + 1
+            </text>
+            <text x="890" y="715" style="font-size: 11px; fill: #7f8c8d; text-anchor: middle;">
+                W=input size, K=pool size, S=stride
+            </text>
+
+            <!-- Note -->
+            <text x="575" y="760" style="font-size: 12px; fill: #7f8c8d; text-anchor: middle; font-style: italic;">
+                Other pooling types: Average Pooling (takes average), Global Pooling (entire feature map → single value)
+            </text>
+        </svg>
+    </div>
+</body>
+</html>

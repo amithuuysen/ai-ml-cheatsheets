@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convolution Operation Visualization</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            background: white;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 40px;
+            font-size: 28px;
+        }
+        svg {
+            display: block;
+            margin: 0 auto;
+        }
+        .cell {
+            stroke: #34495e;
+            stroke-width: 1.5;
+        }
+        .input-cell {
+            fill: #ecf0f1;
+        }
+        .kernel-cell {
+            fill: #3498db;
+        }
+        .output-cell {
+            fill: #2ecc71;
+        }
+        .highlight-cell {
+            fill: #f39c12;
+            stroke: #e67e22;
+            stroke-width: 3;
+        }
+        .cell-text {
+            font-size: 14px;
+            fill: #2c3e50;
+            text-anchor: middle;
+            font-weight: bold;
+        }
+        .kernel-text {
+            font-size: 14px;
+            fill: white;
+            text-anchor: middle;
+            font-weight: bold;
+        }
+        .label {
+            font-size: 16px;
+            font-weight: bold;
+            fill: #2c3e50;
+        }
+        .formula {
+            font-size: 13px;
+            fill: #2c3e50;
+        }
+        .arrow {
+            stroke: #e74c3c;
+            stroke-width: 3;
+            fill: none;
+            marker-end: url(#arrowhead);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🔍 Convolution Operation — Sliding Kernel/Filter</h2>
+        <svg width="1150" height="700" viewBox="0 0 1150 700">
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                    <polygon points="0 0, 10 3, 0 6" fill="#e74c3c" />
+                </marker>
+            </defs>
+
+            <!-- Title -->
+            <text x="575" y="40" style="font-size: 18px; font-weight: bold; fill: #2c3e50; text-anchor: middle;">
+                Step 1: Kernel slides over input, performs element-wise multiplication and sum
+            </text>
+
+            <!-- ========== INPUT IMAGE (5x5) ========== -->
+            <text x="150" y="90" class="label">Input Image (5×5)</text>
+            
+            <!-- Row 1 -->
+            <rect x="50" y="110" width="50" height="50" class="cell highlight-cell"/>
+            <text x="75" y="142" class="cell-text">1</text>
+            <rect x="100" y="110" width="50" height="50" class="cell highlight-cell"/>
+            <text x="125" y="142" class="cell-text">2</text>
+            <rect x="150" y="110" width="50" height="50" class="cell highlight-cell"/>
+            <text x="175" y="142" class="cell-text">3</text>
+            <rect x="200" y="110" width="50" height="50" class="cell input-cell"/>
+            <text x="225" y="142" class="cell-text">4</text>
+            <rect x="250" y="110" width="50" height="50" class="cell input-cell"/>
+            <text x="275" y="142" class="cell-text">5</text>
+
+            <!-- Row 2 -->
+            <rect x="50" y="160" width="50" height="50" class="cell highlight-cell"/>
+            <text x="75" y="192" class="cell-text">6</text>
+            <rect x="100" y="160" width="50" height="50" class="cell highlight-cell"/>
+            <text x="125" y="192" class="cell-text">7</text>
+            <rect x="150" y="160" width="50" height="50" class="cell highlight-cell"/>
+            <text x="175" y="192" class="cell-text">8</text>
+            <rect x="200" y="160" width="50" height="50" class="cell input-cell"/>
+            <text x="225" y="192" class="cell-text">9</text>
+            <rect x="250" y="160" width="50" height="50" class="cell input-cell"/>
+            <text x="275" y="192" class="cell-text">10</text>
+
+            <!-- Row 3 -->
+            <rect x="50" y="210" width="50" height="50" class="cell highlight-cell"/>
+            <text x="75" y="242" class="cell-text">11</text>
+            <rect x="100" y="210" width="50" height="50" class="cell highlight-cell"/>
+            <text x="125" y="242" class="cell-text">12</text>
+            <rect x="150" y="210" width="50" height="50" class="cell highlight-cell"/>
+            <text x="175" y="242" class="cell-text">13</text>
+            <rect x="200" y="210" width="50" height="50" class="cell input-cell"/>
+            <text x="225" y="242" class="cell-text">14</text>
+            <rect x="250" y="210" width="50" height="50" class="cell input-cell"/>
+            <text x="275" y="242" class="cell-text">15</text>
+
+            <!-- Row 4 -->
+            <rect x="50" y="260" width="50" height="50" class="cell input-cell"/>
+            <text x="75" y="292" class="cell-text">16</text>
+            <rect x="100" y="260" width="50" height="50" class="cell input-cell"/>
+            <text x="125" y="292" class="cell-text">17</text>
+            <rect x="150" y="260" width="50" height="50" class="cell input-cell"/>
+            <text x="175" y="292" class="cell-text">18</text>
+            <rect x="200" y="260" width="50" height="50" class="cell input-cell"/>
+            <text x="225" y="292" class="cell-text">19</text>
+            <rect x="250" y="260" width="50" height="50" class="cell input-cell"/>
+            <text x="275" y="292" class="cell-text">20</text>
+
+            <!-- Row 5 -->
+            <rect x="50" y="310" width="50" height="50" class="cell input-cell"/>
+            <text x="75" y="342" class="cell-text">21</text>
+            <rect x="100" y="310" width="50" height="50" class="cell input-cell"/>
+            <text x="125" y="342" class="cell-text">22</text>
+            <rect x="150" y="310" width="50" height="50" class="cell input-cell"/>
+            <text x="175" y="342" class="cell-text">23</text>
+            <rect x="200" y="310" width="50" height="50" class="cell input-cell"/>
+            <text x="225" y="342" class="cell-text">24</text>
+            <rect x="250" y="310" width="50" height="50" class="cell input-cell"/>
+            <text x="275" y="342" class="cell-text">25</text>
+
+            <!-- ========== KERNEL/FILTER (3x3) ========== -->
+            <text x="450" y="90" class="label">Kernel/Filter (3×3)</text>
+            
+            <rect x="400" y="110" width="50" height="50" class="cell kernel-cell"/>
+            <text x="425" y="142" class="kernel-text">1</text>
+            <rect x="450" y="110" width="50" height="50" class="cell kernel-cell"/>
+            <text x="475" y="142" class="kernel-text">0</text>
+            <rect x="500" y="110" width="50" height="50" class="cell kernel-cell"/>
+            <text x="525" y="142" class="kernel-text">-1</text>
+
+            <rect x="400" y="160" width="50" height="50" class="cell kernel-cell"/>
+            <text x="425" y="192" class="kernel-text">1</text>
+            <rect x="450" y="160" width="50" height="50" class="cell kernel-cell"/>
+            <text x="475" y="192" class="kernel-text">0</text>
+            <rect x="500" y="160" width="50" height="50" class="cell kernel-cell"/>
+            <text x="525" y="192" class="kernel-text">-1</text>
+
+            <rect x="400" y="210" width="50" height="50" class="cell kernel-cell"/>
+            <text x="425" y="242" class="kernel-text">1</text>
+            <rect x="450" y="210" width="50" height="50" class="cell kernel-cell"/>
+            <text x="475" y="242" class="kernel-text">0</text>
+            <rect x="500" y="210" width="50" height="50" class="cell kernel-cell"/>
+            <text x="525" y="242" class="kernel-text">-1</text>
+
+            <text x="450" y="285" style="font-size: 12px; fill: #7f8c8d; text-anchor: middle;">
+                (Edge detection filter)
+            </text>
+
+            <!-- Operator symbol -->
+            <text x="320" y="200" style="font-size: 50px; fill: #e74c3c; font-weight: bold;">⊛</text>
+            <text x="320" y="230" style="font-size: 14px; fill: #7f8c8d; text-anchor: middle;">convolution</text>
+
+            <!-- Arrow -->
+            <path d="M 570 185 L 630 185" class="arrow"/>
+
+            <!-- ========== COMPUTATION ========== -->
+            <rect x="650" y="100" width="450" height="200" style="fill: #f8f9fa; stroke: #bdc3c7; stroke-width: 2;" rx="8"/>
+            
+            <text x="875" y="130" style="font-size: 16px; font-weight: bold; fill: #2c3e50; text-anchor: middle;">
+                Element-wise Multiplication & Sum
+            </text>
+
+            <text x="875" y="160" class="formula">
+                (1×1) + (2×0) + (3×-1) + (6×1) + (7×0) + (8×-1) + (11×1) + (12×0) + (13×-1)
+            </text>
+            
+            <text x="875" y="185" class="formula">
+                = 1 + 0 - 3 + 6 + 0 - 8 + 11 + 0 - 13
+            </text>
+            
+            <text x="875" y="210" style="font-size: 20px; font-weight: bold; fill: #e74c3c; text-anchor: middle;">
+                = -6
+            </text>
+
+            <text x="875" y="235" style="font-size: 12px; fill: #7f8c8d; text-anchor: middle;">
+                This value goes into position [0,0] of the output feature map
+            </text>
+
+            <text x="875" y="270" style="font-size: 13px; fill: #2c3e50; text-anchor: middle; font-weight: bold;">
+                Formula: (f ∗ g)[i,j] = ΣₘΣₙ f[m,n] · g[i-m, j-n]
+            </text>
+
+            <!-- ========== OUTPUT FEATURE MAP (3x3) ========== -->
+            <text x="875" y="340" class="label" text-anchor="middle">Output Feature Map (3×3)</text>
+            <text x="875" y="360" style="font-size: 11px; fill: #7f8c8d; text-anchor: middle;">
+                (stride=1, no padding)
+            </text>
+            
+            <rect x="800" y="380" width="50" height="50" class="cell output-cell"/>
+            <text x="825" y="412" class="cell-text" style="fill: white;">-6</text>
+            <rect x="850" y="380" width="50" height="50" class="cell output-cell"/>
+            <text x="875" y="412" class="cell-text" style="fill: white;">?</text>
+            <rect x="900" y="380" width="50" height="50" class="cell output-cell"/>
+            <text x="925" y="412" class="cell-text" style="fill: white;">?</text>
+
+            <rect x="800" y="430" width="50" height="50" class="cell output-cell"/>
+            <text x="825" y="462" class="cell-text" style="fill: white;">?</text>
+            <rect x="850" y="430" width="50" height="50" class="cell output-cell"/>
+            <text x="875" y="462" class="cell-text" style="fill: white;">?</text>
+            <rect x="900" y="430" width="50" height="50" class="cell output-cell"/>
+            <text x="925" y="462" class="cell-text" style="fill: white;">?</text>
+
+            <rect x="800" y="480" width="50" height="50" class="cell output-cell"/>
+            <text x="825" y="512" class="cell-text" style="fill: white;">?</text>
+            <rect x="850" y="480" width="50" height="50" class="cell output-cell"/>
+            <text x="875" y="512" class="cell-text" style="fill: white;">?</text>
+            <rect x="900" y="480" width="50" height="50" class="cell output-cell"/>
+            <text x="925" y="512" class="cell-text" style="fill: white;">?</text>
+
+            <text x="875" y="555" style="font-size: 11px; fill: #7f8c8d; text-anchor: middle;">
+                Kernel slides right and down, repeating this operation
+            </text>
+
+            <!-- ========== STEPS VISUALIZATION ========== -->
+            <text x="575" y="600" style="font-size: 15px; font-weight: bold; fill: #2c3e50; text-anchor: middle;">
+                📋 Process: Kernel slides across input image, computing dot product at each position
+            </text>
+
+            <text x="150" y="630" style="font-size: 12px; fill: #2c3e50;">
+                Step 1: Position [0,0] → output[0,0] = -6 (shown above)
+            </text>
+            <text x="150" y="650" style="font-size: 12px; fill: #2c3e50;">
+                Step 2: Slide right 1 pixel (stride=1) → compute output[0,1]
+            </text>
+            <text x="150" y="670" style="font-size: 12px; fill: #2c3e50;">
+                Step 3-9: Continue sliding to fill entire 3×3 output feature map
+            </text>
+
+            <text x="750" y="630" style="font-size: 12px; fill: #7f8c8d; font-style: italic;">
+                Output size formula:
+            </text>
+            <text x="750" y="650" style="font-size: 12px; fill: #e74c3c; font-weight: bold;">
+                [(W - K + 2P) / S] + 1
+            </text>
+            <text x="750" y="670" style="font-size: 11px; fill: #7f8c8d;">
+                W=input, K=kernel, P=padding, S=stride
+            </text>
+        </svg>
+    </div>
+</body>
+</html>
